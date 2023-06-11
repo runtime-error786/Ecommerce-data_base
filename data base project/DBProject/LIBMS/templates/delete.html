@@ -1,0 +1,84 @@
+{% extends 'adminBase.html' %}
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center" style="margin-top:15px">Delete</h1>
+{%if btn == 2%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="width:98%;margin: 10 auto">
+        All data deleted!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{%elif btn == 1%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="width:98%;margin: 10 auto">
+        Deleted!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{%endif%}
+<div class="grid text-center">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <form method="get" style="display:inline-flex;margin-top:50;">
+          {% comment %} {{form1}} {% endcomment %}
+          <input class="form-control" type="text" name="search" maxlength="20" placeholder="Product name" style="width:150px;margin:10px">
+          <select name="category" id="category" class="form-control w-100" name="category" style="width:150px;margin:10px">
+              <option value="none" selected disabled>Select Category</option>
+              <option value="Home and Kitchen">Home & Kitchen</option>
+              <option value="Beauty and Personal Care">Beauty & Personal Care</option>
+              <option value="Clothing, Shoes and Jewelry">Clothing, Shoes & Jewelry</option>
+              <option value="Toys and Games">Toys & Games</option>
+              <option value="Health, Household and Baby Care">Health, Household & Baby Care</option>
+              <option value="Baby">Baby</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Sports and outdoors">Sports & outdoors</option>
+              <option value="Pet Supplies and Games">Pet Supplies & Games</option>
+              <option value="Office and Supplies">Office & Supplies</option>
+              <option value="Others">Others</option>
+            </select>
+          <input type="submit" value="Search" class="btn btn-primary" style="margin: 10;width:150px;">
+        </form>
+      </div>
+
+<form id="del" method="POST">    {%csrf_token%}
+    {%if flag%}
+        {%if data%}
+            <table class="table table-light table-stripped" style="width: 75%; height: 150px; margin: 20 auto;">
+                <thead style="text-align:center;">
+                <tr>
+                    <th scope="col">Select</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+                </thead>
+                <tbody style="text-align:center;">
+                    {% for row in data %}
+                    <tr>
+                        <td><input type="checkbox" name="selected_rows" value="{{ row.ID }}"></td>
+                        <td>{{ row.ID }}</td>
+                        <td>{{ row.NAME }}</td>
+                        <td>{{ row.CATEGORY }}</td>
+                        <td>{{ row.QUANTITY }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {%else%}
+            <div class="alert alert-warning" role="alert" style="width:98%;margin: 10 auto">
+                No result found!
+            </div>
+        {%endif%}
+    {%endif%}
+    <div style="text-align:center">
+        <input type="submit" name="delbtn" value="Delete" class="btn btn-warning" style="width:25%;margin-top: 25;">
+    </div>
+</form>
+
+<form method='POST'>    {%csrf_token%}
+    <div style="text-align:center">
+    <input type="submit" name="delallbtn" value="Delete all" class="btn btn-danger" style="width:25%;margin: 0 auto;">
+    </div>
+</form>
+
+{% endblock %}
