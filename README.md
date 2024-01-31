@@ -1,6 +1,7 @@
 DBProject
 I've used Oracle 19c for the database as it was the requirement of our project. You'll need to install Oracle 19c on your machine before you can run it. Dont't forget to modify the DATABASES dictionary (username, password etc) declared in the settings.py file accordingly. The SQL code to create the schema and other database stuff is in extras>inventory.sql Make sure to run the SQL code from the inventory.sql file before you run the project.
 Setup:
+git clone https://github.com/your-username/Library-Management-System.git
 Install Python: Django is a Python web framework, so you need to have Python installed on your system. You can download and install Python from the official Python website. Make sure to install Python 3.x as Django is compatible with Python 3.
 
 Install Django: Once you have Python installed, you can install Django using pip, Python's package manager. Open a terminal or command prompt and run the following command:
